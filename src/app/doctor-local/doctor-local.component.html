@@ -1,0 +1,5 @@
+<div class="form-group container">
+  <label for="value">Enter a Value!</label>
+  <input type="text" class="form-control" id="value" #userdata placeholder="Enter value" [(ngModel)]="myvalue">
+  <button type="submit" class="btn btn-primary" (click)="onSubmit(userdata.value)">Submit</button>
+</div>

@@ -1,0 +1,20 @@
+<ul class="list-group container">
+  <li class="list-group-item"> {{(items | async)?.message}} </li>
+</ul>
+
+<div class="container">
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  <button (click)="randomize()" class="btn btn-default">Update</button>
+</div>
+<br>
+<br>
+<br>
