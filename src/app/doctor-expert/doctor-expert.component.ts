@@ -1,13 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from '../data.service';
-import {FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
+import {FirebaseListObservable, FirebaseObjectObservable, AngularFire,AuthProviders, AuthMethods} from 'angularfire2';
+import { moveIn, fallIn, moveInLeft } from '../router.animations';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-doctor-expert',
   templateUrl: './doctor-expert.component.html',
-  styleUrls: ['./doctor-expert.component.css']
+  styleUrls: ['./doctor-expert.component.css'],
+  animations: [moveIn(), fallIn(), moveInLeft()],
+  host: {'[@moveIn]': ''}
 })
 export class DoctorExpertComponent /*implements OnInit*/ {
+  name:any;
   public items: FirebaseObjectObservable<any>;
   /*items: any[] = [];*/
 
@@ -25,8 +30,14 @@ export class DoctorExpertComponent /*implements OnInit*/ {
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];
 
-  constructor(private dataService: DataService) {
+  constructor(public af: AngularFire,private router: Router,private dataService: DataService) {
     this.items = this.dataService.messages;
+    this.af.auth.subscribe(auth => {
+      if(auth) {
+        this.name = auth;
+      }
+    });
+
   }
 
   // events
@@ -57,6 +68,12 @@ export class DoctorExpertComponent /*implements OnInit*/ {
      * so one way around it, is to clone the data, change it and then
      * assign it;
      */
+  }
+
+  logout() {
+    this.af.auth.logout();
+    console.log('logged out');
+    this.router.navigateByUrl('/login');
   }
 
 }

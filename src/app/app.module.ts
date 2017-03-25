@@ -10,16 +10,22 @@ import { DoctorLocalComponent } from './doctor-local/doctor-local.component';
 import {RouterModule, Routes} from "@angular/router";
 import {AngularFireModule} from "angularfire2";
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+import {LoginComponent} from "./login/login.component";
+import {SignUpComponent} from "./sign-up/signup.component";
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBuEVaup2t-DhMnLiVUb2tU_-URp7mZj5Q',
-  authDomain: 'fir-crud-73b08.firebaseapp.com',
-  databaseURL: 'https://fir-crud-73b08.firebaseio.com',
-  storageBucket: 'fir-crud-73b08.appspot.com',
-  messagingSenderId: '52520302305'
+    apiKey: "AIzaSyBon0iWtmOSx46tq3sMQ-hQfJgIJLOnRGE",
+    authDomain: "fir-crud-93bce.firebaseapp.com",
+    databaseURL: "https://fir-crud-93bce.firebaseio.com",
+    storageBucket: "fir-crud-93bce.appspot.com",
+    messagingSenderId: "518157802560"
+
 };
 
 const routes: Routes = [
+  { path: 'signup', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'local-doctor', component: DoctorLocalComponent, },
   { path: 'expert-doctor', component: DoctorExpertComponent}
 ];
@@ -28,7 +34,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     DoctorExpertComponent,
-    DoctorLocalComponent
+    DoctorLocalComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
